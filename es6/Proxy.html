@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    //Proxy
+    //Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤,和改写。
+    let target = {
+      name: '小明',
+      age: 15
+    };
+
+    let handle = {
+      //拦截对象属性的读取，比如proxy.foo和proxy['foo']。
+      get(target, property) {
+        //如果我们操作的是name,那么这里的property就代指name,
+        //如果我们操作的是age,那么这里的property就代指age
+        //也就是说只要对该对象进行访问，无论set或者get还是啥都要经
+        //过handle这层拦截
+        // if (property in target) {
+        //   //判断属性是否在这个目标对象里
+        //   console.log('success');
+        // }
+        console.log('进行了获取的拦截');
+        // return target[property];
+        return Reflect.get(target, property);
+      },
+
+      //拦截propKey in proxy的操作，返回一个布尔值。
+      has(target, propKey) {
+        console.log('进行了是否存在的拦截');
+        return propKey in target;
+      },
+
+      //拦截对象属性的设置，比如proxy.foo = v或proxy['foo'] = v，返回一个布尔值。
+      set(target, propKey, value) {
+        if (propKey === 'name') {
+          console.log('设置姓名');
+          target['name'] = '小明哈哈哈';
+          //当设置姓名的时候 会跳入这个拦截，对值进行设置，但是我们这里写死了就是小明哈哈哈，所以无论设置什么，都是小明哈哈哈
+        }
+        if (propKey === 'age') {
+          if (!Number.isInteger(value)) {
+            throw new Error('age is not a number');
+          }
+          console.log('设置年龄');
+          target['age'] = 99;
+          //当设置年龄的时候 会跳入这个拦截，对值进行设置，但是我们这里写死了就是99，所以无论设置什么，都是99
+        }
+      }
+    };
+    //target参数表示所要拦截的目标对象，handler参数也是一个对象，用来定制拦截行为
+    let pro = new Proxy(target, handle);
+    //定义代理之后 操作pro就相当于直接操作target
+    pro.age = 10; //这个相当于设置，会进入set的拦截器
+
+    console.log(pro.age); //这个相当于读取，会进入get的拦截器
+
+    console.log('age' in pro); //这个相当于in 会进入has的拦截器
+
+    //如果handler没有设置任何拦截，那就等同于直接通向原对象。
+    console.log('如果handler没有设置任何拦截，那就等同于直接通向原对象');
+    var target2 = {};
+    var handler2 = {};
+    var proxy2 = new Proxy(target2, handler2);
+    proxy2.a = 'b'; //操作proxy2就相当于操作target2
+    console.log(target2.a); // "b"
+  </script>
+</html>

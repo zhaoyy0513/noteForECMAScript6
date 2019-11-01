@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    /*
+
+    http://es6.ruanyifeng.com/#docs/array
+    http://blog.java1234.com/blog/articles/550.html
+    arr.push() 从后面添加元素，返回值为添加完后的数组的长度
+    arr.pop() 从后面删除元素，只能是一个，返回值是删除的元素
+    arr.unshift() 从前面添加元素, 返回值是添加完后的数组的长度
+    arr.shift() 从前面删除元素，只能删除一个 返回值是删除的元素
+    arr.concat() 连接两个数组 返回值为连接后的新数组
+    str.split() 将字符串转化为数组
+    arr.reverse() 数组反转
+    includes() 数组是否包含指定值。
+
+    // 11 arr.filter(callback) 过滤数组，返回一个满足要求的数组
+    let arr = [1,2,3,4,5]
+    let arr1 = arr.filter( (i, v) => i < 3)
+    console.log(arr1)    // [1, 2]
+
+
+    //
+    arr.splice(i,n) 删除从i(索引值)开始之后的那个元素。返回值是删除的元素 参数：i 索引值 n 个数
+    let arr5 = [1,2,3,4,5]
+    console.log(arr5.splice(2,2))     //从索引为2的位置开始删除两个元素，则返回的元素是[3,4]
+    console.log(arr5)    // [1,2,5]
+
+    arr.fill(a,b,c);  a:用来填充的数  b:填充开始索引 c:填充结束索引
+
+
+    */
+
+    //arr.sort() 将数组进行排序,返回值是排好的数组，默认是按照最左边的位的数字进行排序
+    let arr = [2, 10, 6, 1, 4, 22, 3];
+    console.log(arr.sort()); //[1, 10, 2, 22, 3, 4, 6]  左边数分别是1，1，2，2，3，4，6
+    let sortByAscend = arr.sort((a, b) => a - b);
+    console.log(sortByAscend); // [1, 2, 3, 4, 6, 10, 22]
+    let sortByDescend = arr.sort((a, b) => b - a);
+    console.log(sortByDescend); // [22, 10, 6, 4, 3, 2, 1]
+
+    let arr1 = [1, 2, 4, 5, 6];
+    arr1.fill(0, 0, 3); //0,0,0,0,6
+  </script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let func1 = function() {
+      console.log('普通匿名函数');
+    };
+    func1();
+
+    let func2 = () => {
+      console.log('箭头函数');
+    };
+    func2();
+
+    //当然如果是一条语句或者一个参数 可以直接省略
+    let func3 = obj => console.log('箭头函数一条语句', obj);
+    func3('ccc');
+
+    let func4 = (a, b) => a + b;
+    console.log(func4(1, 1));
+  </script>
+</html>

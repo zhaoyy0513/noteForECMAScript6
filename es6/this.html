@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+  </body>
+  <script>
+    var name = 'marry';
+    let obj = {
+      name: 'jack',
+      age: 11,
+      getName: function() {
+        //console.log('xxx', this);
+        document.getElementById('btn').onclick = function() {
+          console.log('按钮' + this.name);
+          //这里的this.name是jack
+        };
+      },
+      getName2: () => {
+        //因为用的是箭头函数，与上面的this不是一个
+        document.getElementById('btn').onclick = () => {
+          console.log(this.name);
+          //箭头函数没有this,回按照作用于链寻找离他最近的this,最原始window,this.name就是marry
+        };
+      }
+    };
+    console.log(obj.getName());
+    //console.log('----------------------');
+    console.log(obj.getName2());
+  </script>
+</html>

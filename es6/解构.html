@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let obj = { username: 'lisi', pwd: 'aaa' };
+    // let username = obj.username;
+    // let pwd = obj.pwd;
+    //解构简写成
+    let { username, pwd } = obj;
+    console.log(username, pwd);
+
+    console.log('------------函数简写------');
+    //直接写属性名
+    function func(username, pwd) {
+      console.log(obj);
+      console.log(username, pwd);
+    }
+    func(obj);
+
+    console.log('---------数组简写------');
+    let arr = [1, 4, 2, 'ccc', false, '啦啦啦'];
+    let [, , , a, b] = arr;
+    console.log(a, b); //对应的就会得到ccc和false
+  </script>
+</html>

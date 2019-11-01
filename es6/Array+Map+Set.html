@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    /*
+  Arrays  添加了entries()
+  */
+    // let arr = [22, 33, 44];
+    // let it = arr.entries();
+    // let num = it.next().value; //这里执行的第一个next()取出的是第一个值，以此类推会返回一个数组，里面两个值，第一个值是索引，第二个值是具体的值
+    // console.log(num); //Array [ 0, 22 ]
+    // console.log(num[1]); //22
+
+    let arr = [22, 33, 44];
+    let val = arr.values();
+    console.log(val.next().value); //22
+  </script>
+</html>

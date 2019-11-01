@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //Symbol具有唯一性
+
+    //基本用法
+    let sb = Symbol();
+    let sb2 = Symbol();
+    console.log(sb);
+    console.log(sb2);
+    console.log(sb === sb2); //false
+
+    //定义一个对象
+    let obj = { name: 'jack', age: 10 };
+    let sb3 = Symbol('address');
+    //obj.address = '北京路';如果直接这样可能会把原来的值替换掉，造成错误
+    obj[sb3] = '南京路'; //设置对象的属性，将某个对象当做键，对其赋值
+    //obj[name] = 'kk';  //因为name已经存在，不是对象所以不能这样赋值
+    obj.name = 'kk'; //可以这样为对象属性赋值
+    console.log(obj);
+
+    //因为具有唯一性，所以定义常量的时候也用到
+    //const System_key = 'abc';
+    //const Other_key = 'abc';
+    //上面两个常量的值相同，可能不是我们想要的，因此防止产生相同的值，可以使用Symbol
+    const System_key = Symbol('abc');
+    const Other_key = Symbol('abc');
+    //相比上面的定义，假如在用switch循环的时候 case System_key:和case Other_key:对应的操作是一样的因此会报错，因为他俩的值相同
+    //但是使用Symbol后，两者虽然表面值相等，但是相当于两个不一样的变量，因此switch循环时，并不会报错
+
+    //Symbol.for()
+    //Symbol.for() 类似单例模式，首先会在全局搜索被登记的 Symbol 中是否有该字符串参数作为名称的 Symbol 值，如果有即返回该 Symbol 值，若没有则新建并返回一个以该字符串参数为名称的 Symbol 值，并登记在全局环境中供搜索。
+    let s1 = Symbol('abc');
+    let s2 = Symbol.for('abc');
+    console.log(s1);
+    console.log(s2);
+    console.log(s1 == s2);
+    let s3 = Symbol.for('abc');
+    console.log(s2 == s3);
+
+    //keyFor()返回一个已登记的Symbol类型值的key
+    let fooKey = Symbol.keyFor(s3);
+    console.log(fooKey); //输出的是abc
+    //Symbol.keyFor() 返回一个已登记的 Symbol 类型值的 key ，用来检测该字符串参数作为名称的 Symbol 值是否已被登记。
+  </script>
+</html>
